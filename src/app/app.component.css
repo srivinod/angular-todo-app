@@ -26,3 +26,9 @@ html {
     max-width: 680px;
     padding: 0 15px;
   }
+
+  .edit-mode{
+    border:0;
+    background-color: #fff;
+    width:auto;
+  }

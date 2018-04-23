@@ -16,21 +16,29 @@
     <!-- Add Task Section -->
     <div class="row">       
         <div class="action-center col-lg-10 offset-lg-1 my-5 ">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div class="form-group">
-                        <input 
-                            type="text" 
-                            class="form-control text-center"
-                            placeholder="Type your awesome task here ...">
+            <form (ngSubmit)="onAddtask()" #addTaskForm="ngForm">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                class="form-control text-center"
+                                placeholder="Type your awesome task here ..."
+                                required
+                                ngModel
+                                name="task"
+                                >
+                        </div>
+                    </div>            
+                    <div class="col-lg-2">
+                        <button 
+                            class="btn btn-primary"
+                            [disabled]="!addTaskForm.valid">
+                            Add
+                        </button>
                     </div>
-                </div>            
-                <div class="col-lg-2">
-                    <button class="btn btn-primary">
-                        Add
-                    </button>
-                </div>
-            </div>
+                </div>   
+            </form>
         </div>                          
     </div>
 
@@ -39,120 +47,44 @@
         <div class="col-lg-8 offset-md-1">
             <div class="show-completed text-center pb-5">
                 <a href="">
-                    Show Completed Tasks (12)
+                    Show Completed Tasks ({{ tasks.length }})
                 </a>
             </div>
 
             <div class="task-list">
                 <ul class="list-group list-group-flush"> 
-                    <li class="list-group-item">
+                    <li class="list-group-item" *ngFor="let task of tasks ; let id=index">
                         <div class="d-flex">    
-                            <div class="mr-auto">
+                            <div class="mr-auto form-inline">
                                 <input 
                                     class="mr-2"
                                     type="checkbox" 
-                                    aria-label="Checkbox for following text input"
-                                >
-                                Vestibulum at eros
+                                    aria-label="Checkbox for following text input">
+                               
+                                <input
+                                    class="form-control " 
+                                    [class.edit-mode] = "(selectedTask == id  || EditMode) ? EditMode : !EditMode"                                
+                                    [disabled] = "(selectedTask == id  || EditMode) ? EditMode : !EditMode"
+                                    type="text"
+                                    value="{{ task.task }}"> 
+                                   
                             </div>                                
                             <div class="px-2">
-                                <a href="">
-                                    Edit
-                                </a>
+                                <small>
+                                    <a href="#"
+                                        (click)="enableEditMode(id)">
+                                        {{ (selectedTask !== id  || EditMode) ? 'Edit' : 'Update'}}
+                                    </a>
+                                </small> 
                             </div>
                             <div>
-                                <a href="">
-                                    Delete
-                                </a>                                
+                                <small>
+                                    <a href="#" >
+                                        Delete
+                                    </a>   
+                                </small>                             
                             </div>
                         </div>
-                    </li>
-                    <li class="list-group-item">
-                            <div class="d-flex">    
-                            <div class="mr-auto"> 
-                                <input 
-                                    class="mr-2"
-                                    type="checkbox" 
-                                    aria-label="Checkbox for following text input"
-                                >                                                                 
-                                Cras justo odio
-                            </div>                                
-                            <div class="px-2">
-                                <a href="">
-                                    Edit
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    Delete
-                                </a>   
-                            </div>
-                            </div>
-                    </li>
-                    <li class="list-group-item">
-                            <div class="d-flex">    
-                            <div class="mr-auto">                                  
-                                <input 
-                                    class="mr-2"
-                                    type="checkbox" 
-                                    aria-label="Checkbox for following text input"
-                                >
-                                Porta ac consectetur ac
-                            </div>                                
-                            <div class="px-2">
-                                <a href="">
-                                    Edit
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    Delete
-                                </a>   
-                            </div>
-                            </div>
-                    </li>
-                    <li class="list-group-item">
-                            <div class="d-flex">    
-                            <div class="mr-auto">                                  
-                                <input 
-                                    class="mr-2"
-                                    type="checkbox" 
-                                    aria-label="Checkbox for following text input"
-                                > Morbi leo risus
-                            </div>                                
-                            <div class="px-2">
-                                <a href="">
-                                    Edit
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    Delete
-                                </a>   
-                            </div>
-                            </div>
-                    </li>
-                    <li class="list-group-item">
-                            <div class="d-flex">    
-                            <div class="mr-auto">                                  
-                                <input 
-                                    class="mr-2"
-                                    type="checkbox" 
-                                    aria-label="Checkbox for following text input"
-                                >
-                                Dapibus ac facilisis in
-                            </div>                                
-                            <div class="px-2">
-                                <a href="">
-                                    Edit
-                                </a>
-                            </div>
-                            <div>
-                                <a href="">
-                                    Delete
-                                </a>                              
-                            </div>
-                            </div>
                     </li>  
                 </ul> 
             </div>
