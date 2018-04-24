@@ -46,20 +46,18 @@
     <div class="row">
         <div class="col-lg-8 offset-md-1">
             <div class="show-completed text-center pb-5">
-                <a href="">
-                    Show Completed Tasks ({{ tasks.length }})
+                <a href="#"
+                    (click)="toggleActiveTasks()">
+                    Total Tasks ({{ tasks.length }})
                 </a>
             </div>
 
             <div class="task-list">
                 <ul class="list-group list-group-flush"> 
-                    <li class="list-group-item" *ngFor="let task of tasks ; let id=index">
+                    <li class="list-group-item" *ngFor="let task of tasks | filterStatus : textfilteredTask ; let id=index">
                         <div class="d-flex">    
                             <div class="mr-auto form-inline">
-                                <input 
-                                    class="mr-2"
-                                    type="checkbox" 
-                                    aria-label="Checkbox for following text input">
+ 
                                
                                 <input
                                     #editedTask  
@@ -86,7 +84,8 @@
                             </div>
                             <div>
                                 <small>
-                                    <a href="#" >
+                                    <a href="#"
+                                        (click)="deleteTask(id)" >
                                         Delete
                                     </a>   
                                 </small>                             

@@ -28,4 +28,9 @@ export class TasklistService {
     return this.TasksChanged.emit(this.tasks.slice());
     
   }
+
+  deleteTask(taskId){
+    this.tasks.splice(taskId,1);
+    return this.TasksChanged.emit(this.tasks.slice());
+  }
 }

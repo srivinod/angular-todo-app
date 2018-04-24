@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TasklistService } from './tasklist.service';
+import { TaskStatus } from './taskstatus.pipe';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TaskStatus
   ],
   imports: [
     BrowserModule,

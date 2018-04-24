@@ -15,12 +15,15 @@ export class AppComponent implements OnInit {
  
   @ViewChild('addTaskForm') addtaskform: NgForm;
   @ViewChildren('editedTask') updatedTask : QueryList<ElementRef>;
-  
+  @ViewChildren('checkTask') checkTaskStatus : QueryList<ElementRef>;
  
   tasks:Task[]; 
   EditMode:Boolean= true;
   selectedTask:number;
   textUpdatedTask : string;
+  filteredTask : Boolean = true;
+  textfilteredTask : string = 'active';
+
 
   ngOnInit( ) { 
     this.tasks = this.taskService.getallTasks(); 
@@ -51,5 +54,10 @@ export class AppComponent implements OnInit {
     const newTaskName = new Task(this.textUpdatedTask,'active');    
     this.taskService.updateTask(taskId,newTaskName);     
   }
+ 
+  deleteTask(taskId : number){
+    this.taskService.deleteTask(taskId);
+  }
+ 
 
 }
