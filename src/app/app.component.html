@@ -62,6 +62,7 @@
                                     aria-label="Checkbox for following text input">
                                
                                 <input
+                                    #editedTask  
                                     class="form-control " 
                                     [class.edit-mode] = "(selectedTask == id  || EditMode) ? EditMode : !EditMode"                                
                                     [disabled] = "(selectedTask == id  || EditMode) ? EditMode : !EditMode"
@@ -72,8 +73,14 @@
                             <div class="px-2">
                                 <small>
                                     <a href="#"
+                                        [hidden]="(selectedTask == id  || EditMode) ?  !EditMode : EditMode"
                                         (click)="enableEditMode(id)">
-                                        {{ (selectedTask !== id  || EditMode) ? 'Edit' : 'Update'}}
+                                         Edit 
+                                    </a>
+                                    <a href="#" 
+                                        [hidden]="(selectedTask == id  || EditMode) ?  EditMode : !EditMode"
+                                        (click)="updateTask(id)">
+                                        Update
                                     </a>
                                 </small> 
                             </div>

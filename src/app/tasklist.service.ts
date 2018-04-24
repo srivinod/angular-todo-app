@@ -18,10 +18,14 @@ export class TasklistService {
     return this.tasks.slice();
   } 
 
-  addnewTask(receiveTaskName , receiveTaskStatus){ 
-    console.log(receiveTaskStatus);
+  addnewTask(receiveTaskName , receiveTaskStatus){  
     this.tasks.push(new Task(receiveTaskName,receiveTaskStatus));    
     return this.TasksChanged.emit(this.tasks.slice());
   }
 
+  updateTask(taskId,taskName){
+    this.tasks[taskId] = taskName;  
+    return this.TasksChanged.emit(this.tasks.slice());
+    
+  }
 }
